@@ -9,18 +9,15 @@ source:
   fn: python-graphviz-{{ version }}.zip
   url: https://pypi.io/packages/source/g/graphviz/graphviz-{{ version }}.zip
   sha256: {{ sha256 }}
-  patches:
-    # needed due to the Windows batch script wrappers in conda-forge Graphviz
-    # see https://github.com/conda-forge/graphviz-feedstock/blob/bbfe3c7be2a448dd11db165a18c3edfd5ee6a95d/recipe/bld.bat#L27-L32
-    - windows-bat.patch
 
 build:
   number: 1
   noarch: python
-  script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
   build:
+    - patch
+  host:
     - python
     - pip
   run:
